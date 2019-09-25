@@ -1,0 +1,42 @@
+.App {
+  display: flex;
+  background-color: #efefef;
+  background-image: url("/bg/deco_03.svg"), url("/bg/deco_04.svg");
+  background-repeat: no-repeat;
+  background-position: 35px -180px, 70vw 90%;
+}
+h1 {
+  font-size: 100px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin: 0;
+  padding: 0;
+}
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+
+  margin: 0;
+  padding: 0;
+}
+h5 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: #777777;
+}
+//135px -180px no-repeat / 300px;

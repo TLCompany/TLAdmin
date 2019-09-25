@@ -1,0 +1,25 @@
+.card {
+  padding: 32px;
+  box-sizing: border-box;
+  width: 340px;
+  height: 340px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+  margin: 0 30px 60px;
+  .card_title {
+    margin-bottom: 4px;
+  }
+  .card_body-flex {
+    height: 222px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h3 {
+      color: #777;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1032" height="356" viewBox="0 0 1032 356">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #dbdbdb;
+        stroke-width: 40px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="사각형_3" data-name="사각형 3" class="cls-1">
+    <rect class="cls-2" width="1032" height="356" rx="178"/>
+    <rect class="cls-3" x="20" y="20" width="992" height="316" rx="158"/>
+  </g>
+</svg>
