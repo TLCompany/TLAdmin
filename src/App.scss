@@ -1,9 +1,20 @@
 .App {
   display: flex;
+  min-height: 100%;
   background-color: #efefef;
   background-image: url("/bg/deco_03.svg"), url("/bg/deco_04.svg");
   background-repeat: no-repeat;
   background-position: 35px -180px, 70vw 90%;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:active,
+a:hover {
+  text-decoration: none;
+  color: inherit;
 }
 h1 {
   font-size: 100px;
@@ -39,4 +50,30 @@ h5 {
   padding: 0;
   color: #777777;
 }
-//135px -180px no-repeat / 300px;
+hr {
+  border: none;
+  border-top: 1px solid #dddddd;
+}
+
+// 버튼
+.btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  div {
+    width: 40px;
+    height: 40px;
+  }
+  h5 {
+    margin-top: 4px;
+    text-align: center;
+  }
+}
+
+.btn_edit {
+  div {
+    background: url("/btn_edit.png") center / cover;
+  }
+}

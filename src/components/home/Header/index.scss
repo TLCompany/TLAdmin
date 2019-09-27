@@ -1,7 +1,11 @@
 .header {
   width: 300px;
   min-height: 100vh;
-  background: #454545 url("/bg/deco_01.svg") -111px 578px no-repeat / 356px;
+  background-color: #454545;
+  background-image: url("/bg/deco_01.svg");
+  background-position: -111px 578px;
+  background-repeat: no-repeat;
+  background-size: 356px;
   flex-wrap: wrap;
   align-items: baseline;
   flex-shrink: 0;
@@ -35,5 +39,11 @@
   .header_info {
     position: absolute;
     bottom: 0;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .header {
+    display: none;
   }
 }

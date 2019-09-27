@@ -17,7 +17,7 @@ const index = () => {
         <SmallMenu title="대시보드" activeClassName="smallmenu_active" />
       </NavLink>
       <NavLink exact to="/admin/user">
-        <SmallMenu title="사용자" activeClassName="smallmenu_active" />
+        <SmallMenu title="회원관리" activeClassName="smallmenu_active" />
       </NavLink>
       <NavLink exact to="/admin/gatepost">
         <SmallMenu title="게이트 포스트" activeClassName="smallmenu_active" />

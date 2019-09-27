@@ -1,0 +1,19 @@
+.editinput {
+  margin-bottom: 4px;
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 28px;
+    font-size: 14px;
+    line-height: 24px;
+    background: #e9ecef;
+    color: #343a40;
+    border: none;
+    padding: 4px 8px;
+    font-weight: 500;
+    border-radius: 5px;
+  }
+  input::placeholder {
+    color: #bbb;
+  }
+}

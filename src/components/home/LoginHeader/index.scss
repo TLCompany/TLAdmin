@@ -1,0 +1,11 @@
+.loginheader {
+  width: 100%;
+  height: 100vh;
+  background: url("/bg/golf.jpg") center / cover;
+}
+
+@media screen and (max-width: 768px) {
+  .loginheader {
+    display: none;
+  }
+}

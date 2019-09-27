@@ -1,0 +1,38 @@
+.boardlist01 {
+  height: 105px;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  cursor: pointer;
+  .boardlist01_line {
+    width: 4px;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+  }
+  .boardlist01_detail {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    h5,
+    h4 {
+      width: 290px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    h5:last-child,
+    h4:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.boardlist01_active {
+  background: #f2f2f2;
+  .boardlist01_line {
+    opacity: 1;
+  }
+}

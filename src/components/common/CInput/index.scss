@@ -1,0 +1,38 @@
+.cinput {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+
+  label {
+    position: relative;
+    transition: 0.25s;
+    top: -40px;
+    font-size: 18px;
+    line-height: 16px;
+    margin-left: 12px;
+    font-weight: 700;
+    color: #999;
+    width: 100%;
+    z-index: 0;
+  }
+  input {
+    position: relative;
+    width: 100%;
+    height: 56px;
+    font-size: 16px;
+    text-indent: 16px;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #b2b2b2;
+    z-index: 1;
+  }
+  input:not(:placeholder-shown) + label,
+  input:focus + label {
+    transition: 0.25s;
+    top: -72px;
+    font-size: 14px;
+    color: #777;
+    font-weight: 700;
+  }
+}
