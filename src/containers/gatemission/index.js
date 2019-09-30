@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Context } from "../../store";
-import { URL } from "../../store/url";
+import { URL as MAINURL } from "../../store/url";
 import { NetworkError } from "../../components/function";
 import {
   BigTitle,
@@ -27,10 +27,10 @@ const GateMission = observer(props => {
   const [datailUpdate, isDetailUpdate] = useState(false);
 
   useEffect(() => {
-    if (Store.auth.accessToken && URL) {
+    if (Store.auth.accessToken && MAINURL) {
       const axiosInstance = () => {
         axios
-          .get(`${URL}/admin/gateMission`, {
+          .get(`${MAINURL}/admin/gateMission`, {
             headers: { authorization: Store.auth.accessToken }
           })
           .then(res => {
@@ -45,10 +45,10 @@ const GateMission = observer(props => {
   }, [Store, mode, GMContext]);
 
   useEffect(() => {
-    if (Store.auth.accessToken && URL && now > -1) {
+    if (Store.auth.accessToken && MAINURL && now > -1) {
       const axiosInstance = () => {
         axios
-          .get(`${URL}/admin/gateMission/show/${now}`, {
+          .get(`${MAINURL}/admin/gateMission/show/${now}`, {
             headers: { authorization: Store.auth.accessToken }
           })
           .then(res => {
@@ -105,7 +105,7 @@ const GateMission = observer(props => {
     const axiosInstance = () => {
       axios
         .put(
-          `${URL}/admin/gateMission`,
+          `${MAINURL}/admin/gateMission`,
           { Data: GMContext.data },
           {
             headers: { authorization: Store.auth.accessToken }
@@ -130,7 +130,7 @@ const GateMission = observer(props => {
     GMContext.data.GateRewards.push({
       title: "",
       body: "",
-      videoURL: ""
+      imageURL: ""
     });
   };
 
@@ -380,6 +380,12 @@ const GateMission = observer(props => {
                     GMContext.data.GateRewards.map((rewards, index) => {
                       const handleChange = e => {
                         rewards[e.target.name] = e.target.value;
+
+                        if (e.target.name === "fileupload") {
+                          rewards.imageURL = URL.createObjectURL(
+                            e.target.files[0]
+                          );
+                        }
                       };
                       return (
                         <div className="gatemission_rewards" key={index}>
@@ -389,13 +395,21 @@ const GateMission = observer(props => {
                               style={{
                                 background: `url(${rewards.imageURL}) center / cover`
                               }}
+                              value={rewards.imageURL}
                             />
-                            <Tag
-                              id={index}
-                              body="파일 업로드"
-                              color="teal"
-                              onClick={onGRDelete}
-                              style={{ marginTop: 8 }}
+                            <label
+                              className="tag tag_teal tag_file"
+                              htmlFor="fileupload"
+                            >
+                              IMG 업로드
+                            </label>
+                            <input
+                              type="file"
+                              accept=".jpg,.png,.gif"
+                              name="fileupload"
+                              id="fileupload"
+                              className="fileupload"
+                              onChange={handleChange}
                             />
                           </div>
                           <div className="rewards_desc">
