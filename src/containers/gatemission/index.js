@@ -9,7 +9,8 @@ import {
   BoardList01,
   Loading,
   Tag,
-  EditInput
+  EditInput,
+  EditArea
 } from "../../components/common";
 import "./index.scss";
 import { GateMissionContext } from "../../store/gatemission";
@@ -181,10 +182,12 @@ const GateMission = observer(props => {
                       title={mission.title}
                       active={now === mission.number ? true : false}
                       onClick={() => {
-                        isDetailUpdate(false);
-                        isUpdate(false);
-                        setMode("View");
-                        setNow(mission.number);
+                        if (now !== mission.number) {
+                          isDetailUpdate(false);
+                          isUpdate(false);
+                          setMode("View");
+                          setNow(mission.number);
+                        }
                       }}
                     />
                   </React.Fragment>
@@ -229,10 +232,18 @@ const GateMission = observer(props => {
                       <h4>{GMContext.data.condition}</h4>
                       <br />
                       <h5>상세조건</h5>
-                      <h4>{GMContext.data.detail}</h4>
+                      <textarea
+                        className="view_textarea"
+                        value={GMContext.data.detail}
+                        readOnly
+                      />
                       <br />
                       <h5>도움말</h5>
-                      <h4>{GMContext.data.help}</h4>
+                      <textarea
+                        className="view_textarea"
+                        value={GMContext.data.help}
+                        readOnly
+                      />
                       <br />
                       <h5>게이트 보상</h5>
                       {GMContext.data.GateRewards.length > 0 ? (
@@ -289,30 +300,34 @@ const GateMission = observer(props => {
                         </>
                       )}
                       <br />
-                      <h5>선택 리스트</h5>
-                      {GMContext.data.SelectionLists.length > 0 ? (
-                        GMContext.data.SelectionLists.map((list, index) => {
-                          return (
-                            <div className="gatemission_list" key={index}>
-                              <h4>{list.title}</h4>
-                              <h5>{list.body}</h5>
-                              {list.videoURL && (
-                                <h5>
-                                  <a
-                                    href={list.videoURL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {list.videoURL}
-                                  </a>
-                                </h5>
-                              )}
-                            </div>
-                          );
-                        })
-                      ) : (
+                      {GMContext.data.okType === 6 && (
                         <>
-                          -<br />
+                          <h5>선택 리스트</h5>
+                          {GMContext.data.SelectionLists.length > 0 ? (
+                            GMContext.data.SelectionLists.map((list, index) => {
+                              return (
+                                <div className="gatemission_list" key={index}>
+                                  <h4>{list.title}</h4>
+                                  <h5>{list.body}</h5>
+                                  {list.videoURL && (
+                                    <h5>
+                                      <a
+                                        href={list.videoURL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        {list.videoURL}
+                                      </a>
+                                    </h5>
+                                  )}
+                                </div>
+                              );
+                            })
+                          ) : (
+                            <>
+                              -<br />
+                            </>
+                          )}
                         </>
                       )}
                     </div>
@@ -361,14 +376,14 @@ const GateMission = observer(props => {
                   />
                   <br />
                   <h5>상세조건</h5>
-                  <EditInput
+                  <EditArea
                     value={GMContext.data.detail}
                     name="detail"
                     onChange={handleChange}
                   />
                   <br />
                   <h5>도움말</h5>
-                  <EditInput
+                  <EditArea
                     value={GMContext.data.help}
                     name="help"
                     onChange={handleChange}
@@ -482,46 +497,50 @@ const GateMission = observer(props => {
                     </>
                   )}
                   <br />
-                  <h5>선택 리스트</h5>
-                  <Tag body="추가" color="indigo" onClick={onSLAdd} />
-                  {GMContext.data.SelectionLists.length > 0 ? (
-                    GMContext.data.SelectionLists.map((list, index) => {
-                      const handleChange = e => {
-                        list[e.target.name] = e.target.value;
-                      };
-                      return (
-                        <div className="gatemission_list" key={index}>
-                          <EditInput
-                            value={list.title}
-                            name="title"
-                            onChange={handleChange}
-                            placeholder={"제목"}
-                          />
-                          <EditInput
-                            value={list.body}
-                            name="body"
-                            onChange={handleChange}
-                            placeholder={"내용"}
-                          />
-                          <EditInput
-                            value={list.videoURL}
-                            name="videoURL"
-                            onChange={handleChange}
-                            placeholder={"참고 링크 (URL)"}
-                          />
-                          <Tag
-                            style={{ marginTop: 4 }}
-                            id={index}
-                            body="삭제"
-                            color="red"
-                            onClick={onSLDelete}
-                          />
-                        </div>
-                      );
-                    })
-                  ) : (
+                  {GMContext.data.okType === 6 && (
                     <>
-                      -<br />
+                      <h5>선택 리스트</h5>
+                      <Tag body="추가" color="indigo" onClick={onSLAdd} />
+                      {GMContext.data.SelectionLists.length > 0 ? (
+                        GMContext.data.SelectionLists.map((list, index) => {
+                          const handleChange = e => {
+                            list[e.target.name] = e.target.value;
+                          };
+                          return (
+                            <div className="gatemission_list" key={index}>
+                              <EditInput
+                                value={list.title}
+                                name="title"
+                                onChange={handleChange}
+                                placeholder={"제목"}
+                              />
+                              <EditInput
+                                value={list.body}
+                                name="body"
+                                onChange={handleChange}
+                                placeholder={"내용"}
+                              />
+                              <EditInput
+                                value={list.videoURL}
+                                name="videoURL"
+                                onChange={handleChange}
+                                placeholder={"참고 링크 (URL)"}
+                              />
+                              <Tag
+                                style={{ marginTop: 4 }}
+                                id={index}
+                                body="삭제"
+                                color="red"
+                                onClick={onSLDelete}
+                              />
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <>
+                          -<br />
+                        </>
+                      )}
                     </>
                   )}
                 </div>

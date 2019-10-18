@@ -25,7 +25,7 @@ const DashBoard = () => {
       };
       axiosInstance();
     }
-  }, [Store]);
+  }, [Store, Store.auth.accessToken]);
   console.log(data);
 
   return (

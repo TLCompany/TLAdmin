@@ -20,6 +20,7 @@ const NetworkError = (value, Store) => {
           });
         })
         .catch(err => {
+          console.log(err.response);
           notify("토큰 재발급 실패");
         });
     } else {
