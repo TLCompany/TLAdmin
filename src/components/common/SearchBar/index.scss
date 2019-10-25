@@ -1,0 +1,18 @@
+.searchbar {
+  max-width: 1100px;
+  margin-bottom: 24px;
+  .searchbar_box {
+    display: flex;
+    padding: 12px 20px;
+    img {
+      margin-right: 24px;
+    }
+    input {
+      flex: 1;
+      background: none;
+      border: none;
+      height: 24px;
+      font-size: 16px;
+    }
+  }
+}

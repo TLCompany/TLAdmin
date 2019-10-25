@@ -8,10 +8,12 @@ import {
   Board01,
   BoardList01,
   Loading,
-  Tag
+  Tag,
+  SearchBar
 } from "../../components/common";
 import "./index.scss";
 import { observer } from "mobx-react-lite";
+import { toast } from "react-toastify";
 
 const User = observer(props => {
   const Store = useContext(Context);
@@ -20,11 +22,13 @@ const User = observer(props => {
   const [userChange, setUserChange] = useState(0);
   const [now, setNow] = useState(-1); // 현재 보고있는 것
   const [mode, setMode] = useState(""); // 모드
+  const [page, setPage] = useState(1); // 페이지
   const [, isUpdate] = useState(false);
+  const [search, setSearch] = useState("");
   const [datailUpdate, isDetailUpdate] = useState(false);
 
   useEffect(() => {
-    if (Store.auth.accessToken && MAINURL) {
+    if (Store.auth.accessToken && MAINURL && !data) {
       const axiosInstance = () => {
         axios
           .get(`${MAINURL}/admin/user?page=1`, {
@@ -39,7 +43,7 @@ const User = observer(props => {
       };
       axiosInstance();
     }
-  }, [Store, mode]);
+  }, [Store, data]);
 
   useEffect(() => {
     if (Store.auth.accessToken && MAINURL && now > -1) {
@@ -63,6 +67,11 @@ const User = observer(props => {
       setUserData();
     }
   }, [Store, now]);
+
+  // 토스트
+  const notify = value => {
+    toast.success(value);
+  };
 
   // 수정 스테이트 변경
   const handleChange = e => {
@@ -128,6 +137,7 @@ const User = observer(props => {
         .then(res => {
           setUserData(res.data.Data);
           isUpdate(true);
+          notify("권한이 변경되었습니다.");
         })
         .catch(err => {
           NetworkError(err.response, Store, axiosInstance);
@@ -138,10 +148,80 @@ const User = observer(props => {
     }
   };
 
+  const infinityScroll = e => {
+    if (
+      e.target.scrollHeight - e.target.scrollTop <
+      e.target.clientHeight + 150
+    ) {
+      if (page < data.maxPage) {
+        setPage(page + 1);
+        const axiosInstance = () => {
+          axios
+            .get(`${MAINURL}/admin/user?page=${page + 1}`, {
+              headers: { authorization: Store.auth.accessToken }
+            })
+            .then(res => {
+              setData({
+                ...data,
+                Users: [...data.Users, ...res.data.Data.Users]
+              });
+            })
+            .catch(err => {
+              NetworkError(err.response, Store, axiosInstance);
+            });
+        };
+        axiosInstance();
+      }
+    }
+  };
+
+  const handleSearchInput = e => {
+    setSearch(e.target.value);
+  };
+
+  const onSearch = e => {
+    e.preventDefault();
+    if (search) {
+      const axiosInstance = () => {
+        axios
+          .get(`${MAINURL}/admin/user/search?email=${search}`, {
+            headers: { authorization: Store.auth.accessToken }
+          })
+          .then(res => {
+            setData({ maxPage: 1, Users: [res.data.Data] });
+          })
+          .catch(err => {
+            NetworkError(err.response, Store, axiosInstance);
+          });
+      };
+      axiosInstance();
+    } else {
+      const axiosInstance = () => {
+        axios
+          .get(`${MAINURL}/admin/user?page=1`, {
+            headers: { authorization: Store.auth.accessToken }
+          })
+          .then(res => {
+            setData(res.data.Data);
+          })
+          .catch(err => {
+            NetworkError(err.response, Store, axiosInstance);
+          });
+      };
+      axiosInstance();
+    }
+  };
+
   return (
     <>
       <BigTitle title="회원관리" />
+      <SearchBar
+        value={search}
+        onChange={handleSearchInput}
+        onSubmit={onSearch}
+      />
       <Board01
+        onScroll={infinityScroll}
         list={
           <>
             {data ? (

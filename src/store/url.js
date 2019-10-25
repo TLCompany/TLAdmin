@@ -1,4 +1,4 @@
-// const URL = "http://192.160.0.67:8008";
-const URL = "http://13.209.61.162";
+// const URL = "http://192.160.0.27:8008";
+const URL = "https://happygolf.me/srg";
 
 export { URL };

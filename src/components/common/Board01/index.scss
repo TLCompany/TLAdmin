@@ -1,29 +1,61 @@
 .board01 {
-  min-height: 734px;
-  height: 100%;
   display: flex;
 
   .board01_leftlist {
     box-sizing: border-box;
-    padding: 16px 0;
+    padding: 16px 0 0;
     border-radius: 15px;
     flex-shrink: 0;
-    width: 350px;
-    height: 80vh;
-    min-height: 734px;
+    width: 320px;
+    height: 75vh;
+    // min-height: 650px;
     background: #fff;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
     margin-right: 24px;
-    overflow: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .board01_list {
+      overflow: auto;
+      flex: 1;
+    }
+    .board01_pagination {
+      border-top: 1px solid #ddd;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.16);
+    }
   }
+
+  .pagination_page {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  .pagination_select {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 50px;
+  }
+  .pagination_page:last {
+    margin: 0;
+  }
+
   .board01_rightdetail {
     padding: 28px;
     box-sizing: border-box;
     border-radius: 15px;
     width: 100%;
     max-width: 720px;
-    height: 80vh;
-    min-height: 734px;
+    height: 75vh;
+    // min-height: 650px;
     overflow: auto;
     background: #fff;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
@@ -35,6 +67,16 @@
       .board01_title-left {
         width: 100%;
         margin-right: 40px;
+      }
+      .board01_title-right {
+        display: flex;
+
+        .btn {
+          margin-right: 16px;
+        }
+        .btn:last-child {
+          margin-right: 0;
+        }
       }
     }
 
@@ -64,10 +106,10 @@
     margin: 20px 0;
   }
 }
-
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 1400px) {
   .board01 {
     margin-left: 0px;
+    margin-right: 24px;
     justify-content: center;
     .board01_rightdetail {
       overflow: auto;

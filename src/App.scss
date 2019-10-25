@@ -90,6 +90,18 @@ hr {
   }
 }
 
+.btn_delete {
+  div {
+    background: url("/btn_delete.png") center / cover;
+  }
+}
+
+.btn_add {
+  div {
+    background: url("/btn_add.png") center / cover;
+  }
+}
+
 // 파일 업로드
 .fileupload {
   position: absolute;

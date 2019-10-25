@@ -1,6 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Auth, DashBoard, User, GateMission } from "../containers";
+import {
+  Auth,
+  DashBoard,
+  User,
+  GateMission,
+  NormalPost,
+  Announcement
+} from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
 import { Context } from "../store";
@@ -48,6 +55,12 @@ const MainRouter = props => {
               <Route exact path="/admin/dashboard" component={DashBoard} />
               <Route exact path="/admin/user" component={User} />
               <Route exact path="/admin/gatemission" component={GateMission} />
+              <Route exact path="/admin/normalpost" component={NormalPost} />
+              <Route
+                exact
+                path="/admin/announcement"
+                component={Announcement}
+              />
             </Switch>
           </div>
         </div>

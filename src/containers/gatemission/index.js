@@ -72,6 +72,11 @@ const GateMission = observer(props => {
     toast.error(value);
   };
 
+  // 토스트
+  const notifyS = value => {
+    toast.success(value);
+  };
+
   // 태그 설정
   const setOKType = value => {
     switch (value * 1) {
@@ -115,6 +120,7 @@ const GateMission = observer(props => {
         .then(res => {
           GMContext.data = observable(res.data.Data);
           isUpdate(true);
+          notifyS("수정되었습니다.");
         })
         .catch(err => {
           NetworkError(err.response, Store, axiosInstance);
@@ -133,6 +139,25 @@ const GateMission = observer(props => {
       body: "",
       imageURL: ""
     });
+  };
+
+  // 이미지 업로드
+  const onImgPost = e => {
+    const form = new FormData();
+    const { name } = e.target;
+    form.append("images", e.target.files[0]);
+
+    axios
+      .post(`${MAINURL}/admin/gatemission/upload`, form, {
+        headers: {
+          "content-type": "multipart/form-data",
+          authorization: Store.auth.accessToken
+        }
+      })
+      .then(res => {
+        GMContext.data.GateRewards[name].imageURL = res.data.Data.imageURLs[0];
+      })
+      .catch(err => console.log(err.response));
   };
 
   // 게이트 비디오 관련
@@ -395,12 +420,9 @@ const GateMission = observer(props => {
                     GMContext.data.GateRewards.map((rewards, index) => {
                       const handleChange = e => {
                         rewards[e.target.name] = e.target.value;
-
-                        if (e.target.name === "fileupload") {
-                          rewards.imageURL = URL.createObjectURL(
-                            e.target.files[0]
-                          );
-                        }
+                      };
+                      const handleUpload = e => {
+                        onImgPost(e);
                       };
                       return (
                         <div className="gatemission_rewards" key={index}>
@@ -410,21 +432,20 @@ const GateMission = observer(props => {
                               style={{
                                 background: `url(${rewards.imageURL}) center / cover`
                               }}
-                              value={rewards.imageURL}
                             />
                             <label
                               className="tag tag_teal tag_file"
-                              htmlFor="fileupload"
+                              htmlFor={"fileupload" + index}
                             >
                               IMG 업로드
                             </label>
                             <input
                               type="file"
                               accept=".jpg,.png,.gif"
-                              name="fileupload"
-                              id="fileupload"
+                              name={index}
+                              id={"fileupload" + index}
                               className="fileupload"
-                              onChange={handleChange}
+                              onChange={handleUpload}
                             />
                           </div>
                           <div className="rewards_desc">

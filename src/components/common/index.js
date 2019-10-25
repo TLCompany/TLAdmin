@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import Board01 from "./Board01";
 import BoardList01 from "./BoardList01";
 import Tag from "./Tag";
+import SearchBar from "./SearchBar";
 
 export {
   BigTitle,
@@ -17,5 +18,6 @@ export {
   Loading,
   Board01,
   BoardList01,
-  Tag
+  Tag,
+  SearchBar
 };

@@ -30,7 +30,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <BigTitle title="대시보드" />
+      <BigTitle title="대시보드 ( 테스트 )" />
       <div className="cardboard">
         <Card
           title="총 가입자"
@@ -38,8 +38,8 @@ const DashBoard = () => {
           body={
             <>
               <div className="card_body-flex">
-                <h1>25</h1>
-                <h3>가입</h3>
+                <h1>238</h1>
+                <h3>가입 ( 테스트 )</h3>
               </div>
             </>
           }
@@ -50,8 +50,8 @@ const DashBoard = () => {
           body={
             <>
               <div className="card_body-flex">
-                <h1>25</h1>
-                <h3>가입</h3>
+                <h1>58</h1>
+                <h3>개 ( 테스트 )</h3>
               </div>
             </>
           }
@@ -62,8 +62,8 @@ const DashBoard = () => {
           body={
             <>
               <div className="card_body-flex">
-                <h1>25</h1>
-                <h3>가입</h3>
+                <h1>24</h1>
+                <h3>개 ( 테스트 )</h3>
               </div>
             </>
           }

@@ -11,6 +11,7 @@ const EditInput = props => {
         onChange={props.onChange}
         value={props.value}
         name={props.name}
+        style={props.style}
         required
       />
     </div>
