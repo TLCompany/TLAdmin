@@ -5,6 +5,7 @@
   line-height: 52px;
   margin-bottom: 12px;
   align-items: center;
+  cursor: pointer;
 
   .smallmenu_bar {
     width: 8px;
@@ -16,8 +17,12 @@
   .smallmenu_img {
     width: 30px;
     height: 30px;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 30px;
-    background: #333;
     margin-right: 36px;
   }
 

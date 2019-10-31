@@ -27,7 +27,7 @@ const User = observer(props => {
     if (Store.auth.accessToken && MAINURL) {
       const axiosInstance = () => {
         axios
-          .get(`${MAINURL}/admin/normalPost?page=1`, {
+          .get(`${MAINURL}/admin/gatePost?page=1`, {
             headers: { authorization: Store.auth.accessToken }
           })
           .then(res => {
@@ -77,7 +77,7 @@ const User = observer(props => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       const axiosInstance = () => {
         axios
-          .delete(`${MAINURL}/admin/normalPost/comment/${e.target.id}`, {
+          .delete(`${MAINURL}/admin/gatePost/comment/${e.target.id}`, {
             headers: { authorization: Store.auth.accessToken }
           })
           .then(res => {
@@ -96,7 +96,7 @@ const User = observer(props => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       const axiosInstance = () => {
         axios
-          .delete(`${MAINURL}/admin/normalPost/${nowData.id}`, {
+          .delete(`${MAINURL}/admin/gatePost/${nowData.id}`, {
             headers: { authorization: Store.auth.accessToken }
           })
           .then(res => {
@@ -114,7 +114,7 @@ const User = observer(props => {
 
   let nowData;
   if (data) {
-    nowData = data.NormalPosts.filter(post => post.id === now)[0];
+    nowData = data.GatePosts.filter(post => post.id === now)[0];
   }
 
   if (nowData) {
@@ -124,13 +124,13 @@ const User = observer(props => {
 
   return (
     <>
-      <BigTitle title="기본 포스트" />
+      <BigTitle title="게이트 포스트" />
       <Board01
         onScroll={infinityScroll}
         list={
           <>
             {data ? (
-              data.NormalPosts.map((post, index) => {
+              data.GatePosts.map((post, index) => {
                 return (
                   <React.Fragment key={index}>
                     <BoardList01
@@ -183,21 +183,38 @@ const User = observer(props => {
                   <h5>내용</h5>
                   <h4>{nowData.body}</h4>
                   <br />
-                  <h5>이미지 ( {nowData.NormalPostIMGs.length}개 )</h5>
-                  {nowData.NormalPostIMGs.map((img, index) => (
-                    <div
-                      key={index + img.imageURL}
-                      style={{
-                        background: `URL(${img.imageURL}) 100% center / cover`,
-                        width: 250,
-                        height: 250,
-                        marginTop: 8
-                      }}
-                    />
-                  ))}
-                  <br />
-                  <h5>좋아요를 누른 사용자 ( {nowData.LikeUsers.length}명 )</h5>
-                  {nowData.LikeUsers.map((like, index) => (
+
+                  {nowData.GatePostIMGs.length > 0 && (
+                    <>
+                      <h5>이미지 ( {nowData.GatePostIMGs.length}개 )</h5>
+                      {nowData.GatePostIMGs.map((img, index) => (
+                        <div
+                          key={index + img.imageURL}
+                          style={{
+                            background: `URL(${img.imageURL}) 100% center / cover`,
+                            width: 250,
+                            height: 250,
+                            marginTop: 8
+                          }}
+                        />
+                      ))}
+                      <br />
+                    </>
+                  )}
+                  {nowData.GatePostVideos.length > 0 && (
+                    <>
+                      <h5>비디오 ( {nowData.GatePostVideos.length}개 )</h5>
+                      {nowData.GatePostVideos.map((video, index) => (
+                        <video width="250" key={video.videoURL} controls>
+                          <source src={video.videoURL} />
+                        </video>
+                      ))}
+                      <br />
+                      <br />
+                    </>
+                  )}
+                  <h5>O.K를 누른 사용자 ( {nowData.OkayUsers.length}명 )</h5>
+                  {nowData.OkayUsers.map((like, index) => (
                     <div key={index} className="profile">
                       <div
                         className="profile_img"
@@ -212,13 +229,12 @@ const User = observer(props => {
                       </h4>
                     </div>
                   ))}
-                  <br />
                 </div>
                 <div className="columns_line" />
                 <div className="columns_box">
-                  <h5>댓글 목록 ( {nowData.NormalPostComments.length} 개 )</h5>
+                  <h5>댓글 목록 ( {nowData.GatePostComments.length} 개 )</h5>
                   <br />
-                  {nowData.NormalPostComments.map(comments => {
+                  {nowData.GatePostComments.map(comments => {
                     comments.createdAt = new Date(comments.createdAt);
 
                     return (

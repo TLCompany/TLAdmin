@@ -6,7 +6,9 @@ import {
   User,
   GateMission,
   NormalPost,
-  Announcement
+  Announcement,
+  GatePost,
+  Push
 } from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
@@ -56,6 +58,8 @@ const MainRouter = props => {
               <Route exact path="/admin/user" component={User} />
               <Route exact path="/admin/gatemission" component={GateMission} />
               <Route exact path="/admin/normalpost" component={NormalPost} />
+              <Route exact path="/admin/gatepost" component={GatePost} />
+              <Route exact path="/admin/push" component={Push} />
               <Route
                 exact
                 path="/admin/announcement"

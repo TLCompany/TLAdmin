@@ -127,7 +127,7 @@ const User = observer(props => {
           {
             Data: {
               id: userData.id,
-              level: userChange * 1
+              userType: userChange * 1
             }
           },
           {
