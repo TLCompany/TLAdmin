@@ -14,6 +14,13 @@
     }
   }
 }
+.img_box {
+  flex-shrink: 0;
+  width: 250px;
+  height: 200px;
+  border: 1px solid #d5d5d5;
+  margin-right: 16px;
+}
 .gatemission_videos:first-child {
   margin-top: 12px;
 }

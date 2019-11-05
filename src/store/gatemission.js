@@ -11,6 +11,7 @@ const gatemission = () => {
     detail: "",
     help: "",
     okType: 1,
+    imageURL: "",
     GateRewards: [],
     GateVideos: [],
     SelectionLists: []

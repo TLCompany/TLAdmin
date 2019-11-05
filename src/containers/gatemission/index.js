@@ -160,6 +160,24 @@ const GateMission = observer(props => {
       .catch(err => console.log(err.response));
   };
 
+  // 이미지 업로드
+  const onBGPost = e => {
+    const form = new FormData();
+    form.append("images", e.target.files[0]);
+
+    axios
+      .post(`${MAINURL}/admin/gatemission/upload`, form, {
+        headers: {
+          "content-type": "multipart/form-data",
+          authorization: Store.auth.accessToken
+        }
+      })
+      .then(res => {
+        GMContext.data.imageURL = res.data.Data.imageURLs[0];
+      })
+      .catch(err => console.log(err.response));
+  };
+
   // 게이트 비디오 관련
   const onVideoDelete = e => {
     GMContext.data.GateVideos.splice(e.target.id, 1);
@@ -301,6 +319,14 @@ const GateMission = observer(props => {
                     </div>
                     <div className="columns_line" />
                     <div className="columns_box">
+                      <h5>커버 사진</h5>
+                      <div
+                        className="img_box"
+                        style={{
+                          background: `url(${GMContext.data.imageURL}) center / cover`
+                        }}
+                      />
+                      <br />
                       <h5>게이트 비디오</h5>
                       {GMContext.data.GateVideos.length > 0 ? (
                         GMContext.data.GateVideos.map((videos, index) => {
@@ -484,6 +510,26 @@ const GateMission = observer(props => {
                 </div>
                 <div className="columns_line" />
                 <div className="columns_box">
+                  <h5>커버 사진</h5>
+                  <div
+                    className="img_box"
+                    style={{
+                      background: `url(${GMContext.data.imageURL}) center / cover`
+                    }}
+                  />
+                  <label className="tag tag_teal tag_file" htmlFor={"bgupload"}>
+                    IMG 업로드
+                  </label>
+                  <input
+                    type="file"
+                    accept=".jpg,.png,.gif"
+                    name="bgupload"
+                    id={"bgupload"}
+                    className="fileupload"
+                    onChange={onBGPost}
+                  />
+                  <br />
+                  <br />
                   <h5>게이트 비디오</h5>
                   <Tag body="추가" color="indigo" onClick={onVideoAdd} />
                   {GMContext.data.GateVideos.length > 0 ? (
