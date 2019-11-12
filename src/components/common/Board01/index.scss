@@ -106,6 +106,25 @@
     margin: 20px 0;
   }
 }
+.board01_wide {
+  margin-left: 0px;
+  margin-right: 24px;
+  .board01_rightdetail {
+    overflow: auto;
+    .board01_flexbox {
+      display: block;
+      height: auto;
+      .columns_box {
+        padding: 0;
+        margin-bottom: 16px;
+        border: none;
+      }
+      .columns_line {
+        display: none;
+      }
+    }
+  }
+}
 @media screen and (max-width: 1000px) {
   .board01 {
     margin-left: 0px;

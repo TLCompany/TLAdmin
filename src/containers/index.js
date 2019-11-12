@@ -6,6 +6,8 @@ import NormalPost from "./normalpost";
 import GatePost from "./gatepost";
 import Announcement from "./announcement";
 import Push from "./push";
+import Inqueries from "./inqueries";
+import TermofUse from "./termofuse";
 
 export {
   Auth,
@@ -15,5 +17,7 @@ export {
   NormalPost,
   Announcement,
   GatePost,
-  Push
+  Push,
+  TermofUse,
+  Inqueries
 };

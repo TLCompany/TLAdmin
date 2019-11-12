@@ -8,7 +8,9 @@ import {
   NormalPost,
   Announcement,
   GatePost,
-  Push
+  Push,
+  TermofUse,
+  Inqueries
 } from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
@@ -26,13 +28,13 @@ const MainRouter = props => {
         return <LoginHeader />;
       }
     } else {
-      console.log("현재 메인");
     }
   };
 
   useEffect(() => {
     // 로그인 확인
-    if (document.location.pathname !== "/admin" && Store.auth) {
+    if (document.location.pathname === "/termofuse") {
+    } else if (document.location.pathname !== "/admin" && Store.auth) {
       if (!Store.auth.id) {
         document.location.href = "/admin";
       }
@@ -53,18 +55,21 @@ const MainRouter = props => {
         >
           <div className="wrap">
             <Switch>
+              <Route exact path="/termofuse" component={TermofUse} />
               <Route exact path="/admin" component={Auth} />
               <Route exact path="/admin/dashboard" component={DashBoard} />
               <Route exact path="/admin/user" component={User} />
               <Route exact path="/admin/gatemission" component={GateMission} />
               <Route exact path="/admin/normalpost" component={NormalPost} />
               <Route exact path="/admin/gatepost" component={GatePost} />
+              <Route exact path="/admin/inqueries" component={Inqueries} />
               <Route exact path="/admin/push" component={Push} />
               <Route
                 exact
                 path="/admin/announcement"
                 component={Announcement}
               />
+              <Route component={Auth} />
             </Switch>
           </div>
         </div>

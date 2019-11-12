@@ -34,7 +34,7 @@ const User = observer(props => {
             setData(res.data.Data);
           })
           .catch(err => {
-            NetworkError(err.response, Store, axiosInstance);
+            NetworkError(err.response, Store);
           });
       };
       axiosInstance();

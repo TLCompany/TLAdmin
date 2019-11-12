@@ -21,7 +21,7 @@ const NetworkError = (value, Store) => {
         })
         .catch(err => {
           console.log(err.response);
-          notify("토큰 재발급 실패");
+          notify("토큰 재발급 실패, 재시도..");
         });
     } else {
       notify(value.data.message);

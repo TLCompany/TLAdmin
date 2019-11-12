@@ -67,6 +67,13 @@ const Main = () => {
           img={<ion-icon name="text" />}
         />
       </NavLink>
+      <NavLink exact to="/admin/inqueries">
+        <SmallMenu
+          title="문의내역"
+          activeClassName="smallmenu_active"
+          img={<ion-icon name="help-circle" />}
+        />
+      </NavLink>
       <NavLink exact to="/admin/push">
         <SmallMenu
           title="푸시 알림"

@@ -38,7 +38,7 @@ const GateMission = observer(props => {
             setData(res.data.Data);
           })
           .catch(err => {
-            NetworkError(err.response, Store, axiosInstance);
+            NetworkError(err.response, Store);
           });
       };
       axiosInstance();
@@ -46,7 +46,7 @@ const GateMission = observer(props => {
   }, [Store, mode, GMContext]);
 
   useEffect(() => {
-    if (Store.auth.accessToken && MAINURL && now > -1) {
+    if (Store.auth.accessToken && MAINURL && now > -1 && mode === "View") {
       const axiosInstance = () => {
         axios
           .get(`${MAINURL}/admin/gateMission/show/${now}`, {
@@ -58,14 +58,12 @@ const GateMission = observer(props => {
             isUpdate(true);
           })
           .catch(err => {
-            NetworkError(err.response, Store, axiosInstance);
+            NetworkError(err.response, Store);
           });
       };
       axiosInstance();
-    } else {
-      GMContext.data = observable(GMContext.normalData);
     }
-  }, [Store, now, GMContext]);
+  }, [Store, now, mode, GMContext]);
 
   // 토스트
   const notify = value => {
@@ -108,25 +106,24 @@ const GateMission = observer(props => {
 
   // 수정
   const onEdit = e => {
-    const axiosInstance = () => {
-      axios
-        .put(
-          `${MAINURL}/admin/gateMission`,
-          { Data: GMContext.data },
-          {
-            headers: { authorization: Store.auth.accessToken }
-          }
-        )
-        .then(res => {
-          GMContext.data = observable(res.data.Data);
-          isUpdate(true);
-          notifyS("수정되었습니다.");
-        })
-        .catch(err => {
-          NetworkError(err.response, Store, axiosInstance);
-        });
-    };
-    axiosInstance();
+    axios
+      .put(
+        `${MAINURL}/admin/gateMission`,
+        { Data: GMContext.data },
+        {
+          headers: { authorization: Store.auth.accessToken }
+        }
+      )
+      .then(res => {
+        GMContext.data = observable(res.data.Data);
+        isUpdate(true);
+        setMode("View");
+        notifyS("수정되었습니다.");
+      })
+      .catch(err => {
+        NetworkError(err.response, Store);
+        notify("토큰 재발급으로 다시한번 시도해주세요!");
+      });
   };
 
   // 게이트 보상 관련
@@ -146,6 +143,7 @@ const GateMission = observer(props => {
     const form = new FormData();
     const { name } = e.target;
     form.append("images", e.target.files[0]);
+    toast("이미지 업로드 중입니다.");
 
     axios
       .post(`${MAINURL}/admin/gatemission/upload`, form, {
@@ -156,14 +154,19 @@ const GateMission = observer(props => {
       })
       .then(res => {
         GMContext.data.GateRewards[name].imageURL = res.data.Data.imageURLs[0];
+        toast.success("이미지가 업로드 되었습니다.");
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        toast.error("이미지가 업로드가 실패하였습니다.");
+        console.log(err.response);
+      });
   };
 
   // 이미지 업로드
   const onBGPost = e => {
     const form = new FormData();
     form.append("images", e.target.files[0]);
+    toast("이미지 업로드 중입니다.");
 
     axios
       .post(`${MAINURL}/admin/gatemission/upload`, form, {
@@ -174,8 +177,12 @@ const GateMission = observer(props => {
       })
       .then(res => {
         GMContext.data.imageURL = res.data.Data.imageURLs[0];
+        toast.success("이미지가 업로드 되었습니다.");
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        toast.error("이미지가 업로드가 실패하였습니다.");
+        console.log(err.response);
+      });
   };
 
   // 게이트 비디오 관련
@@ -212,6 +219,7 @@ const GateMission = observer(props => {
     <>
       <BigTitle title="게이트 미션" />
       <Board01
+        wide
         list={
           <>
             {data ? (
@@ -270,35 +278,62 @@ const GateMission = observer(props => {
                     <div className="columns_box">
                       <h5>타입</h5>
                       {setOKType(GMContext.data.okType)}
+                      <h5>커버 사진</h5>
+                      {GMContext.data.imageURL ? (
+                        <div
+                          className="img_box"
+                          style={{
+                            background: `url(${GMContext.data.imageURL}) center / cover`
+                          }}
+                        />
+                      ) : (
+                        <h4>등록된 이미지 없음</h4>
+                      )}
                       <br />
                       <h5>달성조건</h5>
                       <h4>{GMContext.data.condition}</h4>
                       <br />
                       <h5>상세조건</h5>
-                      <textarea
-                        className="view_textarea"
-                        value={GMContext.data.detail}
-                        readOnly
-                      />
+                      <h4>
+                        {GMContext.data.detail
+                          .split("\n")
+                          .map((line, index) => {
+                            return (
+                              <span key={index}>
+                                {line}
+                                <br />
+                              </span>
+                            );
+                          })}
+                      </h4>
                       <br />
-                      <h5>도움말</h5>
-                      <textarea
-                        className="view_textarea"
-                        value={GMContext.data.help}
-                        readOnly
-                      />
+                      <h5>꿀팁</h5>
+                      <h4>
+                        {GMContext.data.help.split("\n").map((line, index) => {
+                          return (
+                            <span key={index}>
+                              {line}
+                              <br />
+                            </span>
+                          );
+                        })}
+                      </h4>
                       <br />
                       <h5>게이트 보상</h5>
                       {GMContext.data.GateRewards.length > 0 ? (
                         GMContext.data.GateRewards.map((rewards, index) => {
                           return (
                             <div className="gatemission_rewards" key={index}>
-                              <div
-                                className="rewards_img"
-                                style={{
-                                  background: `url(${rewards.imageURL}) center / cover`
-                                }}
-                              ></div>
+                              {rewards.imageURL ? (
+                                <div
+                                  className="rewards_img"
+                                  style={{
+                                    background: `url(${rewards.imageURL}) center / cover`
+                                  }}
+                                />
+                              ) : (
+                                <h4>등록된 이미지 없음</h4>
+                              )}
                               <div className="rewards_desc">
                                 <div className="rewards_title">
                                   <h5>{rewards.title}</h5>
@@ -319,13 +354,6 @@ const GateMission = observer(props => {
                     </div>
                     <div className="columns_line" />
                     <div className="columns_box">
-                      <h5>커버 사진</h5>
-                      <div
-                        className="img_box"
-                        style={{
-                          background: `url(${GMContext.data.imageURL}) center / cover`
-                        }}
-                      />
                       <br />
                       <h5>게이트 비디오</h5>
                       {GMContext.data.GateVideos.length > 0 ? (
@@ -407,7 +435,6 @@ const GateMission = observer(props => {
                     onClick={() => {
                       if (window.confirm("수정 내역을 반영하시겠습니까?")) {
                         onEdit();
-                        setMode("View");
                       }
                     }}
                   >
@@ -419,6 +446,30 @@ const GateMission = observer(props => {
               <hr />
               <div className="board01_flexbox">
                 <div className="columns_box">
+                  <h5>커버 사진</h5>
+                  {GMContext.data.imageURL ? (
+                    <div
+                      className="img_box"
+                      style={{
+                        background: `url(${GMContext.data.imageURL}) center / cover`
+                      }}
+                    />
+                  ) : (
+                    <h4>등록된 이미지 없음</h4>
+                  )}
+                  <label className="tag tag_teal tag_file" htmlFor={"bgupload"}>
+                    IMG 업로드
+                  </label>
+                  <br />
+                  <input
+                    type="file"
+                    accept=".jpg,.png,.gif"
+                    name="bgupload"
+                    id={"bgupload"}
+                    className="fileupload"
+                    onChange={onBGPost}
+                  />
+                  <br />
                   <h5>달성조건</h5>
                   <EditInput
                     value={GMContext.data.condition}
@@ -433,7 +484,7 @@ const GateMission = observer(props => {
                     onChange={handleChange}
                   />
                   <br />
-                  <h5>도움말</h5>
+                  <h5>꿀팁</h5>
                   <EditArea
                     value={GMContext.data.help}
                     name="help"
@@ -453,12 +504,16 @@ const GateMission = observer(props => {
                       return (
                         <div className="gatemission_rewards" key={index}>
                           <div>
-                            <div
-                              className="rewards_img"
-                              style={{
-                                background: `url(${rewards.imageURL}) center / cover`
-                              }}
-                            />
+                            {GMContext.data.imageURL ? (
+                              <div
+                                className="img_box"
+                                style={{
+                                  background: `url(${GMContext.data.imageURL}) center / cover`
+                                }}
+                              />
+                            ) : (
+                              <h4>등록된 이미지 없음</h4>
+                            )}
                             <label
                               className="tag tag_teal tag_file"
                               htmlFor={"fileupload" + index}
@@ -510,25 +565,6 @@ const GateMission = observer(props => {
                 </div>
                 <div className="columns_line" />
                 <div className="columns_box">
-                  <h5>커버 사진</h5>
-                  <div
-                    className="img_box"
-                    style={{
-                      background: `url(${GMContext.data.imageURL}) center / cover`
-                    }}
-                  />
-                  <label className="tag tag_teal tag_file" htmlFor={"bgupload"}>
-                    IMG 업로드
-                  </label>
-                  <input
-                    type="file"
-                    accept=".jpg,.png,.gif"
-                    name="bgupload"
-                    id={"bgupload"}
-                    className="fileupload"
-                    onChange={onBGPost}
-                  />
-                  <br />
                   <br />
                   <h5>게이트 비디오</h5>
                   <Tag body="추가" color="indigo" onClick={onVideoAdd} />

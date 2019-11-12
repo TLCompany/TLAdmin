@@ -3,7 +3,7 @@ import "./index.scss";
 
 const Board01 = props => {
   return (
-    <div className="board01">
+    <div className={`board01 ${props.wide && `board01_wide`}`}>
       <div className="board01_leftlist">
         <div
           className="board01_list"
