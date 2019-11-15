@@ -113,14 +113,6 @@ const User = observer(props => {
     nowData.updatedAt = new Date(nowData.updatedAt);
   }
 
-  // const spare = {
-  //   type: "", //"company","own"
-  //   compName: "",
-  //   checkDate: "",
-  //   address: "",
-  //   output: 0 // 자동
-  // };
-
   return (
     <>
       <BigTitle title="문의내역" />
@@ -140,7 +132,7 @@ const User = observer(props => {
                         )
                       }
                       key={index}
-                      subtitle={post.User.nickname}
+                      subtitle={post.User && post.User.nickname}
                       title={post.content}
                       active={now === post.id ? true : false}
                       onClick={() => {
@@ -168,7 +160,10 @@ const User = observer(props => {
                   <h4 style={{ marginBottom: 4, color: "#777777" }}>
                     {nowData.id}
                   </h4>
-                  <h3>작성자 : {nowData.User.nickname}</h3>
+                  <h3>
+                    작성자 :{" "}
+                    {nowData.User ? nowData.User.nickname : "<데이터 없음>"}
+                  </h3>
                 </div>
                 <div className="board01_title-right">
                   <div className="btn btn_delete" onClick={onDelete}>

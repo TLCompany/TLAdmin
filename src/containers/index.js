@@ -8,6 +8,7 @@ import Announcement from "./announcement";
 import Push from "./push";
 import Inqueries from "./inqueries";
 import TermofUse from "./termofuse";
+import Landing from "./landing";
 
 export {
   Auth,
@@ -19,5 +20,6 @@ export {
   GatePost,
   Push,
   TermofUse,
-  Inqueries
+  Inqueries,
+  Landing
 };

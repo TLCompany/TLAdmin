@@ -1,0 +1,424 @@
+.landing {
+  @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+  @import url(https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap);
+  /* 초기화 */
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: "spoqa han sans", "Malgun Gothic", Arial, Helvetica, sans-serif;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  /* H1~6 폰트 지정 */
+  h2 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  h3 {
+    font-size: 36px;
+    line-height: 52px;
+    font-weight: bold;
+  }
+  h4 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: normal;
+  }
+  h6 {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  hr {
+    width: 100%;
+    height: 0px;
+    border: 0px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  /* 공통부분 */
+  .landing_header {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    line-height: 80px;
+    z-index: 10;
+  }
+  .header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    width: 120px;
+    height: 50px;
+    background: url("/logo_landing.png") center / contain no-repeat;
+  }
+  .small_greencircle {
+    width: 6px;
+    height: 6px;
+    background: #4db07f;
+    display: inline-block;
+    margin-right: 4px;
+    border-radius: 6px;
+    top: 3px;
+  }
+  .container_landing {
+    width: 1120px;
+    height: 100%;
+    margin: 0 auto;
+  }
+  .ico_heart {
+    width: 20px;
+    height: 18px;
+    background: url("/ico_heart.png") center / cover;
+  }
+  .ico_ok {
+    width: 26px;
+    height: 19px;
+    background: url("/ico_ok.png") center / cover;
+  }
+  .ico_appstore {
+    width: 212px;
+    height: 64px;
+    background: url("/ico_appstore.png") center / cover;
+    margin: 16px 0;
+  }
+  .ico_googleplay {
+    width: 212px;
+    height: 64px;
+    background: url("/ico_googleplay.png") center / cover;
+  }
+  /* 애니메이션 */
+  @keyframes slidein {
+    from {
+      position: relative;
+      top: 50px;
+      opacity: 0;
+    }
+
+    to {
+      position: relative;
+      top: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes moveright {
+    from {
+      position: relative;
+      left: 200px;
+    }
+
+    to {
+      position: relative;
+      left: -200px;
+    }
+  }
+
+  /* 빅 타이틀 */
+  .bigtitle-line {
+    width: 80px;
+    height: 6px;
+    background: white;
+    margin-bottom: 32px;
+  }
+  .bigtitle-line_green {
+    background: #54b081;
+  }
+  .bigtitle-title {
+    margin-bottom: 120px;
+  }
+  .bigtitle-title-main {
+    position: relative;
+    margin-bottom: 16px;
+    word-break: keep-all;
+    width: 700px;
+  }
+  /* body-box 01 */
+  .body-box_01 {
+    background: url("/bg1.png") center / cover;
+    width: 100%;
+    height: 100vh;
+    color: white;
+  }
+  .body-box_01_flex {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  /* body-box 01 왼쪽 */
+  .body-box_01_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+    animation-duration: 0.4s;
+    animation-name: slidein;
+  }
+  /* body-box 01 오른쪽 */
+  .body-box_01_right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+  }
+  .body-box_01_right-box {
+    width: 348px;
+    min-height: 348px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px 28px;
+    box-sizing: border-box;
+    color: black;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    animation-duration: 0.8s;
+    animation-name: slidein;
+  }
+  .body-box_01_right-box_gate {
+    font-family: "Lexend Deca", sans-serif;
+    margin-bottom: 8px;
+    font-size: 24px;
+  }
+  .body-box_01_right-box_gatenumber {
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 36px;
+  }
+  .body-box_01_right-box_title {
+    margin: 8px 0;
+  }
+  .body-box_01_right-box_gray {
+    margin-top: 16px;
+    color: #bbbbbb;
+  }
+  .body-box_01_right-box_sub {
+    margin-top: 8px;
+  }
+  .body-box_01_right-box_button {
+    cursor: pointer;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    width: 100%;
+    height: 52px;
+    background: #4fb080;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  /* body-box 02 */
+  .body-box_02 {
+    width: 100%;
+    height: auto;
+  }
+  .body-box_02_flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .body-box_02_flex-top {
+    margin-top: 120px;
+  }
+  .body-box_02_flex-bottom {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 160px;
+  }
+  .body-box_02_flex-bottom-box {
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 302px;
+    height: 232px;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    flex-shrink: 0;
+    margin-right: 36px;
+    animation: moveright 40s linear infinite alternate;
+  }
+  .body-box_02_flex-bottom-box_green {
+    background: #54b081;
+    color: white;
+    border: #3f8b63;
+  }
+  .body-box_02_flex-bottom-box_line-green {
+    background: #3f8b63;
+    margin-bottom: 16px;
+    width: 100%;
+    height: 4px;
+  }
+  .body-box_02_flex-bottom-box_title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .body-box_02_flex-bottom-box_line {
+    background: #e8e8e8;
+    margin-bottom: 16px;
+    width: 100%;
+    height: 4px;
+  }
+  .body-box_02_flex-bottom-box_gate {
+    position: relative;
+    bottom: 0;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 22px;
+  }
+  .body-box_02_flex-bottom-box_gatenumber {
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 32px;
+  }
+  /* body-box 03 */
+  .body-box_03 {
+    background: url("/bg2.png") center / cover;
+    width: 100%;
+    min-height: 720px;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+  }
+  /* body-box 04 */
+  .body-box_04_top {
+    margin-top: 120px;
+  }
+  .body-box_04_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 120px;
+  }
+  .body-box_04_bottom-box {
+    width: 336px;
+    height: 400px;
+    background: gray;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+  /* body-box 05 */
+  .body-box_05 {
+    background: #f4f4f4;
+    padding: 80px 0;
+  }
+  .body-box_05-flex {
+    display: flex;
+  }
+  .body-box_05-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .body-box_05-left-content {
+    margin-left: 60px;
+  }
+  .body-box_05-right {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  /* footer */
+  .footer {
+    height: 218px;
+    background: #3e3e3e;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 1130px) {
+    /* H1~6 폰트 지정 */
+    h2 {
+      font-size: 36px;
+      line-height: 40px;
+    }
+    .container_landing {
+      width: 100%;
+      padding: 0 40px;
+      box-sizing: border-box;
+    }
+    .body-box_01 {
+      height: auto;
+    }
+    .body-box_01_flex {
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      flex-wrap: wrap;
+      padding: 150px 20px;
+    }
+    .body-box_01_left {
+      width: 300px;
+      margin-top: 150px;
+      margin-bottom: 0px;
+      order: 2;
+    }
+    .body-box_01_right {
+      order: 1;
+      width: 100%;
+    }
+    .bigtitle-title {
+      margin-bottom: 0px;
+    }
+    .body-box_02_flex-top {
+      margin-bottom: 60px;
+    }
+    .bigtitle-title-main {
+      max-width: 500px;
+      width: 100%;
+    }
+    @keyframes moveright {
+      from {
+        position: relative;
+        left: 1000px;
+      }
+
+      to {
+        position: relative;
+        left: -1000px;
+      }
+    }
+    .body-box_02_flex-bottom-box {
+      animation: moveright 40s linear infinite alternate;
+    }
+    .body-box_03 {
+      align-items: center;
+    }
+    .body-box_04_bottom {
+      flex-direction: column;
+    }
+    .body-box_04_bottom-box {
+      margin-top: 40px;
+    }
+    .body-box_05-flex {
+      flex-direction: column;
+    }
+    .body-box_05-left {
+      order: 2;
+      justify-content: center;
+      align-items: center;
+    }
+    .body-box_05-left-content {
+      margin-left: 0;
+    }
+    .body-box_05-right {
+      order: 1;
+      justify-content: center;
+      margin-bottom: 80px;
+    }
+  }
+}

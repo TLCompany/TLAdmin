@@ -10,7 +10,8 @@ import {
   GatePost,
   Push,
   TermofUse,
-  Inqueries
+  Inqueries,
+  Landing
 } from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
@@ -21,7 +22,7 @@ const MainRouter = props => {
   const PATH_NAME = document.location.pathname;
   // 주소별 헤더 표시
   const HeaderChoice = value => {
-    if (PATH_NAME.slice(1, 6) === "admin") {
+    if (PATH_NAME.includes("admin")) {
       if (PATH_NAME.slice(7, 8)) {
         return <Header />;
       } else {
@@ -32,13 +33,14 @@ const MainRouter = props => {
   };
 
   useEffect(() => {
+    const PATH_NAME = document.location.pathname;
     // 로그인 확인
-    if (document.location.pathname === "/termofuse") {
-    } else if (document.location.pathname !== "/admin" && Store.auth) {
+    if (PATH_NAME === "/termofuse" || PATH_NAME === "/") {
+    } else if (PATH_NAME !== "/admin" && Store.auth) {
       if (!Store.auth.id) {
         document.location.href = "/admin";
       }
-    } else if (document.location.pathname === "/admin" && Store.auth) {
+    } else if (PATH_NAME === "/admin" && Store.auth) {
       if (Store.auth.id) {
         document.location.href = "/admin/dashboard";
       }
@@ -50,11 +52,12 @@ const MainRouter = props => {
       <Router>
         {HeaderChoice()}
         <div
-          className="container"
+          className={PATH_NAME !== "/" ? "container" : "container_landing"}
           style={{ marginLeft: PATH_NAME === "/admin" && 0 }}
         >
           <div className="wrap">
             <Switch>
+              <Route exact path="/" component={Landing} />
               <Route exact path="/termofuse" component={TermofUse} />
               <Route exact path="/admin" component={Auth} />
               <Route exact path="/admin/dashboard" component={DashBoard} />
@@ -69,7 +72,7 @@ const MainRouter = props => {
                 path="/admin/announcement"
                 component={Announcement}
               />
-              <Route component={Auth} />
+              <Route component={Landing} />
             </Switch>
           </div>
         </div>
