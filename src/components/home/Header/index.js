@@ -74,6 +74,13 @@ const Main = () => {
           img={<ion-icon name="help-circle" />}
         />
       </NavLink>
+      <NavLink exact to="/admin/community">
+        <SmallMenu
+          title="커뮤니티"
+          activeClassName="smallmenu_active"
+          img={<ion-icon name="people" />}
+        />
+      </NavLink>
       <NavLink exact to="/admin/push">
         <SmallMenu
           title="푸시 알림"

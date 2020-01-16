@@ -1,0 +1,26 @@
+.gatemission_rewards {
+  display: flex;
+  margin: 20px 0;
+  .rewards_img {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #d5d5d5;
+    margin-right: 16px;
+  }
+  .rewards_desc {
+    *:first-child {
+      margin-top: 8px;
+    }
+  }
+}
+.gatemission_videos:first-child {
+  margin-top: 12px;
+}
+.gatemission_videos {
+  margin-top: 4px;
+}
+.gatemission_list {
+  border-bottom: 1px solid #d5d5d5;
+  padding: 12px 0;
+}

@@ -11,7 +11,10 @@ import {
   Push,
   TermofUse,
   Inqueries,
-  Landing
+  Landing,
+  Community,
+  CommunityReq,
+  CommunityJoin
 } from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
@@ -67,6 +70,17 @@ const MainRouter = props => {
               <Route exact path="/admin/gatepost" component={GatePost} />
               <Route exact path="/admin/inqueries" component={Inqueries} />
               <Route exact path="/admin/push" component={Push} />
+              <Route exact path="/admin/community" component={Community} />
+              <Route
+                exact
+                path="/admin/community/join"
+                component={CommunityJoin}
+              />
+              <Route
+                exact
+                path="/admin/community/req"
+                component={CommunityReq}
+              />
               <Route
                 exact
                 path="/admin/announcement"

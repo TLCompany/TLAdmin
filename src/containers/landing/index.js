@@ -22,43 +22,30 @@ const Landing = () => {
       <ScrollableAnchor id={`header`}>
         <div className="body-box_01">
           <div className="body-box_01_flex container_landing">
-            <div className="body-box_01_left">
-              <div className="bigtitle-line"></div>
-              <div className="bigtitle-title">
-                <h2 className="bigtitle-title-main">골프로드 72</h2>
-                <h4>
-                  즐거운 골프 라이프를
-                  <br />
-                  위한 지침서
-                  <br />
-                </h4>
-              </div>
+            <div className="bigtitle-title">
+              <h2 className="bigtitle-title-main">
+                골프천재가 된 왕초보님
+                <br />
+                이제 꽃길만 걷자!
+              </h2>
+              <h4>
+                즐거운 골프 라이프를
+                <br />
+                위한 지침서, 골프로드 72
+                <br />
+              </h4>
             </div>
-            <div className="body-box_01_right">
-              <div className="body-box_01_right-box">
-                <div className="body-box_01_right-box_gate">
-                  GATE{" "}
-                  <span className="body-box_01_right-box_gatenumber">25</span>
-                </div>
-                <hr />
-                <h3 className="body-box_01_right-box_title">
-                  숏 게임 레슨
-                  <br />
-                  다녀오기.
-                </h3>
-                <hr />
-                <h6 className="body-box_01_right-box_gray">완료시 혜택</h6>
-                <h6 className="body-box_01_right-box_sub">
-                  <div className="small_greencircle"></div>
-                  완료시 특별한 혜택이 기다리고 있습니다.
-                </h6>
-                <a href="#download">
-                  <div className="body-box_01_right-box_button">
-                    <h4>골프로드 72 다운로드</h4>
-                  </div>
-                </a>
-              </div>
-            </div>
+            <div
+              data-aos="zoom-in"
+              data-aos-duration="400"
+              style={{
+                background: `url('./screenshot.png') center/contain no-repeat`,
+                minWidth: 328,
+                height: 694,
+                boxShadow: `0 10px 20px rgba(0, 0, 0, 0.1)`,
+                borderRadius: 26
+              }}
+            />
           </div>
         </div>
       </ScrollableAnchor>
@@ -82,103 +69,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="body-box_02_flex-bottom">
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                골프를
-                <br />
-                시작하다
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE{" "}
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  0
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                골프 스윙
-                <br />
-                만들기
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE{" "}
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  1
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                스크린 골프 <br />
-                18홀 완주
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE{" "}
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  4
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box body-box_02_flex-bottom-box_green">
-              <div className="body-box_02_flex-bottom-box_title">
-                골프 커뮤니티
-                <br />
-                활동 시작하기
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line-green"></div>
-                GATE{" "}
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  7
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                스크린 골프
-                <br />
-                90타 돌파
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  18
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                필드골프
-                <br />
-                10회 이상 달성
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  20
-                </span>
-              </div>
-            </div>
-            <div className="body-box_02_flex-bottom-box">
-              <div className="body-box_02_flex-bottom-box_title">
-                1박2일
-                <br />
-                골프 해보기
-              </div>
-              <div className="body-box_02_flex-bottom-box_gate">
-                <div className="body-box_02_flex-bottom-box_line"></div>
-                GATE
-                <span className="body-box_02_flex-bottom-box_gatenumber">
-                  24
-                </span>
-              </div>
-            </div>
+            <div className="img" data-aos="fade-up" data-aos-duration="700" />
           </div>
         </div>
       </div>
@@ -314,17 +205,7 @@ const Landing = () => {
               </div>
             </div>
             <div className="body-box_05-right">
-              <div
-                data-aos="zoom-in"
-                data-aos-duration="400"
-                style={{
-                  background: `url('./screenshot.png') center/contain no-repeat`,
-                  minWidth: 328,
-                  height: 694,
-                  boxShadow: `0 10px 20px rgba(0, 0, 0, 0.1)`,
-                  borderRadius: 26
-                }}
-              ></div>
+              <div data-aos="zoom-in" data-aos-duration="400" className="img" />
             </div>
           </div>
         </div>

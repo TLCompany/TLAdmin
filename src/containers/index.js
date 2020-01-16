@@ -9,6 +9,9 @@ import Push from "./push";
 import Inqueries from "./inqueries";
 import TermofUse from "./termofuse";
 import Landing from "./landing";
+import Community from "./community";
+import CommunityReq from "./communityreq";
+import CommunityJoin from "./communityjoin";
 
 export {
   Auth,
@@ -21,5 +24,8 @@ export {
   Push,
   TermofUse,
   Inqueries,
-  Landing
+  Landing,
+  Community,
+  CommunityReq,
+  CommunityJoin
 };
