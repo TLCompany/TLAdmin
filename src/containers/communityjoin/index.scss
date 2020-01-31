@@ -1,26 +1,26 @@
-.board {
-  width: auto;
-  margin-right: 24px;
-  max-width: 960px;
-  border-radius: 15px;
-  padding: 40px;
-  height: auto;
-  background: #fff;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-
-  h3 {
-    margin-bottom: 8px;
+.gatemission_rewards {
+  display: flex;
+  margin: 20px 0;
+  .rewards_img {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border: 1px solid #d5d5d5;
+    margin-right: 16px;
   }
-
-  button {
-    cursor: pointer;
-    width: 50%;
-    height: 60px;
-    border-radius: 5px;
-    background: linear-gradient(to right, #5a5a5a, #292929);
-    color: white;
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-    display: block;
-    margin: 0 auto;
+  .rewards_desc {
+    *:first-child {
+      margin-top: 8px;
+    }
   }
+}
+.gatemission_videos:first-child {
+  margin-top: 12px;
+}
+.gatemission_videos {
+  margin-top: 4px;
+}
+.gatemission_list {
+  border-bottom: 1px solid #d5d5d5;
+  padding: 12px 0;
 }

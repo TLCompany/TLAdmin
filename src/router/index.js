@@ -14,7 +14,8 @@ import {
   Landing,
   Community,
   CommunityReq,
-  CommunityJoin
+  CommunityJoin,
+  CommunityPost
 } from "../containers";
 import { Header, LoginHeader } from "../components/home";
 import "./index.scss";
@@ -80,6 +81,11 @@ const MainRouter = props => {
                 exact
                 path="/admin/community/req"
                 component={CommunityReq}
+              />
+              <Route
+                exact
+                path="/admin/community/post/:id"
+                component={CommunityPost}
               />
               <Route
                 exact

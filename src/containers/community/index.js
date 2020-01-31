@@ -9,11 +9,13 @@ import {
   BoardList01,
   Loading,
   EditInput,
-  EditArea
+  EditArea,
+  Tag
 } from "../../components/common";
 import "./index.scss";
 import { observer } from "mobx-react-lite";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Community = observer(props => {
   const Store = useContext(Context);
@@ -28,6 +30,10 @@ const Community = observer(props => {
     type: 0,
     imageURL: ""
   };
+
+  const initialPushData = { title: "", message: "", communityID: "" };
+  const [push, setPush] = useState(initialPushData);
+
   // 토스트
   const notify = value => {
     toast.success(value);
@@ -127,7 +133,7 @@ const Community = observer(props => {
   // 이미지 업로드
   const onBGPost = e => {
     const form = new FormData();
-    form.append("images", e.target.files[0]);
+    form.append("Files", e.target.files[0]);
     toast("이미지 업로드 중입니다.");
 
     axios
@@ -148,6 +154,35 @@ const Community = observer(props => {
         toast.error("이미지가 업로드가 실패하였습니다.");
         console.log(err.response);
       });
+  };
+
+  const onPush = e => {
+    if (window.confirm("공지를 등록하시겠습니까? ( 푸시가 발송됩니다 )")) {
+      const axiosInstance = () => {
+        axios
+          .post(
+            `${MAINURL}/admin/push/community`,
+            { Data: push },
+            {
+              headers: { authorization: Store.auth.accessToken }
+            }
+          )
+          .then(res => {
+            notify("공지가 추가되었습니다.");
+          })
+          .catch(err => {
+            NetworkError(err.response, Store, axiosInstance);
+          });
+      };
+      axiosInstance();
+    }
+  };
+
+  const handlePushChange = e => {
+    setPush({
+      ...push,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
@@ -174,6 +209,7 @@ const Community = observer(props => {
                               post => post.id === an.id
                             )[0]
                           );
+                          setPush({ ...initialPushData, communityID: an.id });
                         }
                       }}
                     />
@@ -251,9 +287,34 @@ const Community = observer(props => {
                             </React.Fragment>
                           ))}
                       </h4>
+                      <br />
+                      <Link to={`/admin/community/post/${nowData.id}`}>
+                        <Tag color="violet" body="커뮤니티 포스트 보기" />
+                      </Link>
                     </div>
                     <div className="columns_line" />
                     <div className="columns_box">
+                      <h5>공지사항 등록</h5>
+                      <h5>제목</h5>
+                      <EditInput
+                        name="title"
+                        value={push.title}
+                        onChange={handlePushChange}
+                      />
+                      <h5>내용</h5>
+                      <EditArea
+                        name="message"
+                        value={push.message}
+                        onChange={handlePushChange}
+                        style={{ height: 120 }}
+                      />
+                      <br />
+                      <Tag
+                        color="indigo"
+                        body="공지사항 등록"
+                        onClick={onPush}
+                      />
+                      <hr />
                       <h5>타입 ( 공개 / 비공개 )</h5>
                       <h4>{nowData.type === 0 ? "비공개" : "공개"}</h4>
                       <br />

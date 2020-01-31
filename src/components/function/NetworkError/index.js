@@ -4,7 +4,11 @@ import { URL } from "../../../store/url";
 
 const NetworkError = (value, Store) => {
   const notify = value => {
-    toast.error(value);
+    if (value) {
+      toast.error(value);
+    } else {
+      toast.error("");
+    }
   };
 
   if (value) {
@@ -24,7 +28,7 @@ const NetworkError = (value, Store) => {
           notify("토큰 재발급 실패, 재시도..");
         });
     } else {
-      notify(value.data.message);
+      notify(value.data.code);
     }
   } else {
     notify("[서버] 접속 실패");

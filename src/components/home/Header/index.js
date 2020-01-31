@@ -60,6 +60,20 @@ const Main = () => {
           img={<ion-icon name="flag" />}
         />
       </NavLink>
+      <NavLink exact to="/admin/community">
+        <SmallMenu
+          title="커뮤니티"
+          activeClassName="smallmenu_active"
+          img={<ion-icon name="people" />}
+        />
+      </NavLink>
+      <NavLink exact to="/admin/community/join">
+        <SmallMenu
+          title="커뮤니티 가입신청"
+          activeClassName="smallmenu_active"
+          img={<ion-icon name="list" />}
+        />
+      </NavLink>
       <NavLink exact to="/admin/announcement">
         <SmallMenu
           title="공지사항"
@@ -72,13 +86,6 @@ const Main = () => {
           title="문의내역"
           activeClassName="smallmenu_active"
           img={<ion-icon name="help-circle" />}
-        />
-      </NavLink>
-      <NavLink exact to="/admin/community">
-        <SmallMenu
-          title="커뮤니티"
-          activeClassName="smallmenu_active"
-          img={<ion-icon name="people" />}
         />
       </NavLink>
       <NavLink exact to="/admin/push">

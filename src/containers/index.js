@@ -12,6 +12,7 @@ import Landing from "./landing";
 import Community from "./community";
 import CommunityReq from "./communityreq";
 import CommunityJoin from "./communityjoin";
+import CommunityPost from "./communitypost";
 
 export {
   Auth,
@@ -27,5 +28,6 @@ export {
   Landing,
   Community,
   CommunityReq,
-  CommunityJoin
+  CommunityJoin,
+  CommunityPost
 };

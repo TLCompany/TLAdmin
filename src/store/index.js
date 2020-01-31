@@ -6,12 +6,12 @@ const Store = value => {
   const [auth, setAuth] = useState("");
 
   useEffect(() => {
-    setAuth(InitializeSession("auth", JSON.stringify({}), "object"));
+    setAuth(InitializeLocal("auth", JSON.stringify({}), "object"));
   }, []);
 
   const actions = {
     setAuth: value => {
-      window.sessionStorage.setItem("auth", JSON.stringify(value));
+      window.localStorage.setItem("auth", JSON.stringify(value));
       setAuth(value);
     }
   };
@@ -19,20 +19,20 @@ const Store = value => {
   return { auth, actions };
 };
 
-// const InitializeLocal = (key, init, type) => {
-//   let initialNumber = init;
-//   let loadLS = window.localStorage.getItem(key);
-//   !loadLS ? (initialNumber = init) : (initialNumber = loadLS);
-//   window.localStorage.setItem(key, initialNumber);
-//   return type === "object" ? JSON.parse(initialNumber) : initialNumber;
-// };
-
-const InitializeSession = (key, init, type) => {
+const InitializeLocal = (key, init, type) => {
   let initialNumber = init;
-  let loadLS = window.sessionStorage.getItem(key);
+  let loadLS = window.localStorage.getItem(key);
   !loadLS ? (initialNumber = init) : (initialNumber = loadLS);
-  window.sessionStorage.setItem(key, initialNumber);
+  window.localStorage.setItem(key, initialNumber);
   return type === "object" ? JSON.parse(initialNumber) : initialNumber;
 };
+
+// const InitializeSession = (key, init, type) => {
+//   let initialNumber = init;
+//   let loadLS = window.sessionStorage.getItem(key);
+//   !loadLS ? (initialNumber = init) : (initialNumber = loadLS);
+//   window.sessionStorage.setItem(key, initialNumber);
+//   return type === "object" ? JSON.parse(initialNumber) : initialNumber;
+// };
 
 export { Context, Store };

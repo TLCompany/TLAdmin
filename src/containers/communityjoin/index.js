@@ -1,19 +1,26 @@
-import React, { useState, useContext, useEffect } from "react";
-import "./index.scss";
-import { BigTitle } from "../../components/common";
-import { URL as MAINURL } from "../../store/url";
+import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Context } from "../../store";
-import { toast } from "react-toastify";
+import { URL as MAINURL } from "../../store/url";
 import { NetworkError } from "../../components/function";
+import {
+  BigTitle,
+  Board01,
+  BoardList01,
+  Loading
+} from "../../components/common";
+import "./index.scss";
+import { observer } from "mobx-react-lite";
+import { toast } from "react-toastify";
 
-const Push = () => {
-  const [data, setData] = useState([]);
-  const [loading, isLoading] = useState(false);
+const CommunityJoin = observer(props => {
   const Store = useContext(Context);
+  const [data, setData] = useState(); // 리스트 데이터
+  const [now, setNow] = useState(-1); // 현재 보고있는 것
+  const [mode, setMode] = useState(""); // 모드
 
   useEffect(() => {
-    if (Store.auth.accessToken && MAINURL) {
+    if (Store.auth.accessToken && MAINURL && !mode) {
       const axiosInstance = () => {
         axios
           .get(`${MAINURL}/admin/community/join/list`, {
@@ -28,44 +35,111 @@ const Push = () => {
       };
       axiosInstance();
     }
-  }, [Store]);
+  }, [Store, mode]);
 
-  const onPost = e => {
-    e.preventDefault();
-    if (window.confirm("푸시 메세지를 발송하시겠습니까?")) {
-      isLoading(true);
+  let nowData;
+  if (data) {
+    nowData = data.filter(post => post.community.id === now)[0];
+  }
+
+  const onApprove = (UID, CID) => {
+    if (window.confirm("승인하시겠습니까?")) {
       axios
         .post(
-          `${MAINURL}/admin/push`,
-          { Data: data },
+          `${MAINURL}/admin/community/join/approve`,
           {
-            headers: {
-              authorization: Store.auth.accessToken
+            Data: {
+              userID: UID,
+              communityID: CID
             }
+          },
+          {
+            headers: { authorization: Store.auth.accessToken }
           }
         )
         .then(res => {
-          isLoading(false);
-          toast.success("푸시 메세지가 발송되었습니다.");
+          toast.success("승인하였습니다.");
+          setMode("");
         })
         .catch(err => {
-          isLoading(false);
-          console.log(err.response);
+          NetworkError(err.response, Store);
         });
     }
   };
+
   return (
     <>
-      <BigTitle title="커뮤니티 가입 신청" />
-      <div className="board" onSubmit={onPost}>
-        {data.map((d, index) => (
-          <div key={index}>
-            {d.user.nickname} {d.community.name}
-          </div>
-        ))}
-      </div>
+      <BigTitle title="커뮤니티 가입신청" />
+      <Board01
+        list={
+          <>
+            {data ? (
+              data.map((an, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <BoardList01
+                      key={index}
+                      subtitle={`${an.community.name}`}
+                      title={an.community.intro}
+                      active={now === an.community.id ? true : false}
+                      onClick={() => {
+                        if (now !== an.community.id) {
+                          setMode("View");
+                          setNow(an.community.id);
+                        }
+                      }}
+                    />
+                  </React.Fragment>
+                );
+              })
+            ) : (
+              <Loading />
+            )}
+          </>
+        }
+        detail={
+          <>
+            {nowData ? (
+              <>
+                <div className="board01_title">
+                  <div className="board01_title-left">
+                    <h4>{nowData.community.id}</h4>
+                    <h3>{nowData.community.name}</h3>
+                  </div>
+                  <div className="board01_title-right">
+                    <div
+                      className="btn btn_edit"
+                      onClick={() => {
+                        onApprove(nowData.user.id, nowData.community.id);
+                      }}
+                    >
+                      <div />
+                      <h5>승인</h5>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div className="board01_flexbox">
+                  <div className="columns_box">
+                    <h5>내용</h5>
+                    <h4>{nowData.community.intro}</h4>
+                    <br />
+                    <h5>신청자</h5>
+                    <h4>{nowData.user.nickname}</h4>
+                    <br />
+                    <h5>신청자 이메일</h5>
+                    <h4>{nowData.user.email}</h4>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        }
+      />
     </>
   );
-};
+});
 
-export default Push;
+export default CommunityJoin;
